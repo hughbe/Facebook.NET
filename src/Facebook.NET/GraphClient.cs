@@ -19,14 +19,20 @@ namespace Facebook
             AccessToken = $"{appId}|{appSecret}";
         }
 
-        public Post GetPost(PageRequest request) => ConstructRequest<Post>(request.PageId, request);
+        public T GetPost<T>(PageRequest request) where T : Post
+        {
+            return ConstructRequest<T>(request.PageId, request);
+        }
 
         public PagedResponse<T> GetPosts<T>(PostsRequest request) where T : Post
         {
             return ConstructRequest<T>(request.PageId, request.Edge.ToString(), request);
         }
 
-        public Page GetPage(PageRequest request) => ConstructRequest<Page>(request.PageId, request);
+        public T GetPage<T>(PageRequest request) where T : Page
+        {
+            return ConstructRequest<T>(request.PageId, request);
+        }
 
         private GraphPagedResponse<T> ConstructRequest<T>(string node, string api, PagedRequest request)
         {
