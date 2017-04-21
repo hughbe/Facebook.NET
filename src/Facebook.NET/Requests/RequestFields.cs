@@ -1,5 +1,6 @@
 ﻿using Facebook.NET.Requests;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Facebook.Requests
@@ -58,11 +59,12 @@ namespace Facebook.Requests
 
         public static void Serialize(IEnumerable<PageField> pageFields, StringBuilder stringBuilder)
         {
-            IEnumerable<PageField> fields = pageFields ?? DefaultPageFields;
+            PageField[] fields = (pageFields ?? DefaultPageFields).ToArray();
 
             stringBuilder.Append("fields=");
-            foreach (PageField field in fields)
+            for (int i = 0; i < fields.Length; i++)
             {
+                PageField field = fields[i];
                 switch (field)
                 {
                     case PageField.Id:
@@ -79,7 +81,10 @@ namespace Facebook.Requests
                         break;
                 }
 
-                stringBuilder.Append(',');
+                if (i != fields.Length - 1)
+                {
+                    stringBuilder.Append(',');
+                }
             }
 
             stringBuilder.Append("&");
@@ -87,11 +92,12 @@ namespace Facebook.Requests
 
         public static void Serialize(IEnumerable<PostField> postFields, StringBuilder stringBuilder)
         {
-            IEnumerable<PostField> fields = postFields ?? DefaultPostFields;
+            PostField[] fields = (postFields ?? DefaultPostFields).ToArray();
 
             stringBuilder.Append("fields=");
-            foreach (PostField field in fields)
+            for (int i = 0; i < fields.Length; i++)
             {
+                PostField field = fields[i];
                 switch (field)
                 {
                     case PostField.Id:
@@ -147,7 +153,10 @@ namespace Facebook.Requests
                         break;
                 }
 
-                stringBuilder.Append(',');
+                if (i != fields.Length - 1)
+                {
+                    stringBuilder.Append(',');
+                }
             }
 
             stringBuilder.Append("&");
@@ -155,11 +164,12 @@ namespace Facebook.Requests
 
         public static void Serialize(IEnumerable<CommentField> commentFields, StringBuilder stringBuilder)
         {
-            IEnumerable<CommentField> fields = commentFields ?? DefaultCommentFields;
+            CommentField[] fields = (commentFields ?? DefaultCommentFields).ToArray();
 
             stringBuilder.Append("fields=");
-            foreach (CommentField field in fields)
+            for (int i = 0; i < fields.Length; i++)
             {
+                CommentField field = fields[i];
                 switch (field)
                 {
                     case CommentField.Id:
@@ -188,7 +198,10 @@ namespace Facebook.Requests
                         break;
                 }
 
-                stringBuilder.Append(',');
+                if (i != fields.Length - 1)
+                {
+                    stringBuilder.Append(',');
+                }
             }
 
             stringBuilder.Append("&");
