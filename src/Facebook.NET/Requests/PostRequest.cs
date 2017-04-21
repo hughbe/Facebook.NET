@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Facebook.Requests
 {
-    public class PostsRequest : PagedRequest
+    class PostRequest : Request
     {
-        public string PageId { get; set; }
-        public PostsRequestEdge Edge { get; set; }
+        public string PostId { get; set; }
         public IEnumerable<PostField> Fields { get; set; }
 
         internal override void Format(StringBuilder builder)
         {
             RequestFields.Serialize(Fields, builder);
-            base.Format(builder);
         }
     }
 }

@@ -1,16 +1,17 @@
-﻿using System.Text;
+﻿using Facebook.NET.Requests;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Facebook.Requests
 {
     public class PageRequest : Request
     {
         public string PageId { get; set; }
-
-        private const string Fields = "id,name,fan_count,category";
+        public IEnumerable<PageField> Fields { get; set; }
 
         internal override void Format(StringBuilder builder)
         {
-            builder.AppendFormat("fields={0}&", Fields);
+            RequestFields.Serialize(Fields, builder);
         }
     }
 }
