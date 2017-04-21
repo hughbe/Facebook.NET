@@ -29,6 +29,16 @@ namespace Facebook
             return ConstructRequest<T>(request.PageId, request.Edge.ToString(), request);
         }
 
+        public T GetCommment<T>(CommentRequest request) where T : Comment
+        {
+            return ConstructRequest<T>(request.CommentId, request);
+        }
+
+        public PagedResponse<T> GetComments<T>(CommentsRequest request) where T: Comment
+        {
+            return ConstructRequest<T>(request.ParentId, "comments", request);
+        }
+
         public T GetPage<T>(PageRequest request) where T : Page
         {
             return ConstructRequest<T>(request.PageId, request);

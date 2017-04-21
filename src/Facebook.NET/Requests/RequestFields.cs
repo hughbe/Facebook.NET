@@ -38,12 +38,30 @@ namespace Facebook.Requests
             }
         }
 
+        private static IEnumerable<CommentField> _defaultCommentFields;
+        private static IEnumerable<CommentField> DefaultCommentFields
+        {
+            get
+            {
+                if (_defaultCommentFields == null)
+                {
+                    _defaultCommentFields = new CommentField[]
+                    {
+                        CommentField.Id,              CommentField.Message,       CommentField.Poster,      CommentField.NumberOfLikes,
+                        CommentField.NumberOfReplies, CommentField.ParentComment, CommentField.CreatedTime, CommentField.UpdatedTime
+                    };
+                }
+
+                return _defaultCommentFields;
+            }
+        }
+
         public static void Serialize(IEnumerable<PageField> pageFields, StringBuilder stringBuilder)
         {
             IEnumerable<PageField> fields = pageFields ?? DefaultPageFields;
 
             stringBuilder.Append("fields=");
-            foreach (PageField field in pageFields)
+            foreach (PageField field in fields)
             {
                 switch (field)
                 {
@@ -63,6 +81,8 @@ namespace Facebook.Requests
 
                 stringBuilder.Append(',');
             }
+
+            stringBuilder.Append("&");
         }
 
         public static void Serialize(IEnumerable<PostField> postFields, StringBuilder stringBuilder)
@@ -129,6 +149,49 @@ namespace Facebook.Requests
 
                 stringBuilder.Append(',');
             }
+
+            stringBuilder.Append("&");
+        }
+
+        public static void Serialize(IEnumerable<CommentField> commentFields, StringBuilder stringBuilder)
+        {
+            IEnumerable<CommentField> fields = commentFields ?? DefaultCommentFields;
+
+            stringBuilder.Append("fields=");
+            foreach (CommentField field in fields)
+            {
+                switch (field)
+                {
+                    case CommentField.Id:
+                        stringBuilder.Append("id");
+                        break;
+                    case CommentField.Message:
+                        stringBuilder.Append("message");
+                        break;
+                    case CommentField.Poster:
+                        stringBuilder.Append("from");
+                        break;
+                    case CommentField.NumberOfLikes:
+                        stringBuilder.Append("like_count");
+                        break;
+                    case CommentField.NumberOfReplies:
+                        stringBuilder.Append("comment_count");
+                        break;
+                    case CommentField.ParentComment:
+                        stringBuilder.Append("parent");
+                        break;
+                    case CommentField.CreatedTime:
+                        stringBuilder.Append("created_time");
+                        break;
+                    case CommentField.UpdatedTime:
+                        stringBuilder.Append("updated_time");
+                        break;
+                }
+
+                stringBuilder.Append(',');
+            }
+
+            stringBuilder.Append("&");
         }
     }
 }
