@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Facebook
@@ -12,7 +13,7 @@ namespace Facebook
         public int EndItemIndex => PageNumber * PageSize;
     }
 
-    public abstract class PagedResponse<T> : PagedResponse
+    public abstract class PagedResponse<T> : PagedResponse, IEnumerable<T>
     {
         public IEnumerable<T> Data { get; set; }
 
@@ -37,6 +38,9 @@ namespace Facebook
                 response = response.NextPage();
             }
         }
+
+        public IEnumerator<T> GetEnumerator() => AllData().Flatten().GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
     }
 
     public static class PagedResponseExtensions
