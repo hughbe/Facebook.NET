@@ -11,6 +11,8 @@ namespace Facebook.Models
         [JsonProperty(PropertyName = "fan_count")]
         public int FanCount { get; set; }
 
+        public string Category { get; set; }
+
         public override string ToString() => Name;
     }
 }

@@ -6,7 +6,7 @@ namespace Facebook.Requests
     {
         public string PageId { get; set; }
 
-        private const string Fields = "id,name,fan_count";
+        private const string Fields = "id,name,fan_count,category";
 
         internal override void Format(StringBuilder builder)
         {
