@@ -13,23 +13,25 @@ namespace Facebook
         public int EndItemIndex => PageNumber * PageSize;
     }
 
-    public abstract class PagedResponse<T> : PagedResponse, IEnumerable<T>
+    public abstract class PagedResponse<T> : PagedResponse
     {
         public IEnumerable<T> Data { get; set; }
 
         public abstract PagedResponse<T> PreviousPage();
         public abstract PagedResponse<T> NextPage();
 
-        public IEnumerable<PagedResponse<T>> AllData()
+        public IEnumerable<T> AllData() => AllPages().Flatten();
+
+        public IEnumerable<PagedResponse<T>> AllPages()
         {
             yield return this;
-            foreach (PagedResponse<T> remainingData in AllDataAfterThis())
+            foreach (PagedResponse<T> remainingPages in AllPagesAfterThis())
             {
-                yield return remainingData;
+                yield return remainingPages;
             }
         }
 
-        public IEnumerable<PagedResponse<T>> AllDataAfterThis()
+        public IEnumerable<PagedResponse<T>> AllPagesAfterThis()
         {
             PagedResponse<T> response = NextPage();
             while (response != null)
@@ -38,9 +40,6 @@ namespace Facebook
                 response = response.NextPage();
             }
         }
-
-        public IEnumerator<T> GetEnumerator() => AllData().Flatten().GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
     }
 
     public static class PagedResponseExtensions
