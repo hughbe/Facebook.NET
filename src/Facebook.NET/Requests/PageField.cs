@@ -1,4 +1,4 @@
-﻿namespace Facebook.NET.Requests
+﻿namespace Facebook.Requests
 {
     public enum PageField
     {
