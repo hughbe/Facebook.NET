@@ -13,7 +13,7 @@ namespace Facebook.Requests
             {
                 if (_defaultPageFields == null)
                 {
-                    _defaultPageFields = new PageField[] { PageField.Id, PageField.Name, PageField.Category, PageField.Category };
+                    _defaultPageFields = new PageField[] { PageField.Id, PageField.Name, PageField.FanCount, PageField.Category };
                 }
                 return _defaultPageFields;
             }
