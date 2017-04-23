@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Facebook.Requests
@@ -7,7 +6,6 @@ namespace Facebook.Requests
     public class CommentRequest : Request
     {
         public string CommentId { get;  }
-        public IEnumerable<CommentField> Fields { get; set; }
 
         public CommentRequest(string commentId)
         {
@@ -25,7 +23,7 @@ namespace Facebook.Requests
 
         internal override void Format(StringBuilder builder)
         {
-            RequestFields.Serialize(Fields, builder);
+            RequestFields.Serialize(Fields ?? RequestFields.DefaultCommentFields, builder);
         }
     }
 }

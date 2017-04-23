@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Facebook.Requests.Tests
 {
-    public class CommentRequetsTests
+    public class CommentRequestTests
     {
         [Fact]
         public void Ctor_ValidCommentId_ReturnsExpected()
@@ -22,9 +22,9 @@ namespace Facebook.Requests.Tests
         [Theory]
         [InlineData("")]
         [InlineData("  ")]
-        public void Ctor_EmptyCommentId_ThrowsArgumentException(string pageId)
+        public void Ctor_EmptyCommentId_ThrowsArgumentException(string commentId)
         {
-            Assert.Throws<ArgumentException>("commentId", () => new CommentRequest(pageId));
+            Assert.Throws<ArgumentException>("commentId", () => new CommentRequest(commentId));
         }
     }
 }

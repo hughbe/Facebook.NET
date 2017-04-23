@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Facebook.Requests
@@ -7,7 +6,6 @@ namespace Facebook.Requests
     public class PageRequest : Request
     {
         public string PageId { get; }
-        public IEnumerable<PageField> Fields { get; set; }
 
         public PageRequest(string pageId)
         {
@@ -25,7 +23,7 @@ namespace Facebook.Requests
 
         internal override void Format(StringBuilder builder)
         {
-            RequestFields.Serialize(Fields, builder);
+            RequestFields.Serialize(Fields ?? RequestFields.DefaultPageFields, builder);
         }
     }
 }
