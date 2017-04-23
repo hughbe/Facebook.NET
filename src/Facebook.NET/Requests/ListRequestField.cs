@@ -26,7 +26,7 @@ namespace Facebook.Requests
             }
             if (limit < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(limit), limit, "Argument cannot be zero or negative.");
+                throw new ArgumentOutOfRangeException(nameof(limit), limit, "Argument cannot be negative.");
             }
             if (limit > MaxLimit)
             {
