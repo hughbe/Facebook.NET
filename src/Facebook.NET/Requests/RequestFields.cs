@@ -31,10 +31,11 @@ namespace Facebook.Requests
                 {
                     _defaultPostFields = new RequestField[]
                     {
-                        RequestField.Id,           RequestField.Message, RequestField.Link,    RequestField.Caption,   RequestField.Description,
-                        RequestField.Poster,       RequestField.Created, RequestField.Updated, RequestField.Permalink, RequestField.StatusType,
-                        RequestField.CallToAction, RequestField.Type,    RequestField.Name,    RequestField.Place,     RequestField.Comments,
-                        RequestField.Shares,       RequestField.Reactions
+                        RequestField.Id,          RequestField.Message,    RequestField.Link,    RequestField.Caption,
+                        RequestField.Description, RequestField.Poster,     RequestField.Created, RequestField.Updated,
+                        RequestField.Permalink,   RequestField.StatusType, RequestField.Type,    RequestField.Name,
+                        RequestField.Place,       RequestField.Shares,
+                        RequestField.Comments.Limit(0).Summary(true),      RequestField.Reactions.Limit(0).Summary(true),
                     };
                 }
                 return _defaultPostFields;
@@ -50,7 +51,7 @@ namespace Facebook.Requests
                 {
                     _defaultCommentFields = new RequestField[]
                     {
-                        RequestField.Id,              RequestField.Message,       RequestField.Poster,      RequestField.NumberOfLikes,
+                        RequestField.Id,              RequestField.Message,       RequestField.Poster,  RequestField.NumberOfLikes,
                         RequestField.NumberOfReplies, RequestField.ParentComment, RequestField.Created, RequestField.Updated
                     };
                 }

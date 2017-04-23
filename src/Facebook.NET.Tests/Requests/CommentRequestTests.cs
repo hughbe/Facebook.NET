@@ -11,6 +11,7 @@ namespace Facebook.Requests.Tests
             var commentRequest = new CommentRequest("CommentId");
             Assert.Equal("CommentId", commentRequest.CommentId);
             Assert.Null(commentRequest.Fields);
+            Assert.Equal("fields=id,message,from,like_count,comment_count,parent,created_time,updated_time&", commentRequest.ToString());
         }
 
         [Fact]
