@@ -24,7 +24,7 @@ namespace Facebook.Requests
             {
                 throw new InvalidOperationException("Request already has a limit.");
             }
-            if (limit <= 0)
+            if (limit < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(limit), limit, "Argument cannot be zero or negative.");
             }

@@ -37,6 +37,7 @@ namespace Facebook.Requests.Tests
         }
 
         [Theory]
+        [InlineData(0, "FieldName.limit(0)")]
         [InlineData(1, "FieldName.limit(1)")]
         [InlineData(100, "FieldName.limit(100)")]
         public void Limit_Invoke_ReturnsExpected(int limit, string expectedToString)
@@ -57,7 +58,6 @@ namespace Facebook.Requests.Tests
 
         [Theory]
         [InlineData(-1)]
-        [InlineData(0)]
         [InlineData(101)]
         public void Limit_InvalidLimit_ThrowsArgumentOutOfRangeException(int limit)
         {
