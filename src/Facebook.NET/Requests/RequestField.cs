@@ -53,12 +53,12 @@ namespace Facebook.Requests
         public static RequestField FanCount => new RequestField("fan_count");
         public static RequestField Category => new RequestField("category");
 
-        internal virtual void Serialize(StringBuilder builder) => builder.Append(FieldName);
+        internal virtual void Format(StringBuilder builder) => builder.Append(FieldName);
 
         public override string ToString()
         {
             var builder = new StringBuilder();
-            Serialize(builder);
+            Format(builder);
             return builder.ToString();
         }
     }

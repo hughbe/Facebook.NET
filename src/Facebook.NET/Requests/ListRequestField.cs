@@ -46,9 +46,9 @@ namespace Facebook.Requests
             return new ListRequestField(FieldName, RequestLimit, summary);
         }
 
-        internal override void Serialize(StringBuilder builder)
+        internal override void Format(StringBuilder builder)
         {
-            base.Serialize(builder);
+            base.Format(builder);
             if (RequestLimit.HasValue)
             {
                 builder.Append($".limit({RequestLimit})");

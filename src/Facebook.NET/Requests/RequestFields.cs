@@ -67,7 +67,7 @@ namespace Facebook.Requests
             for (int i = 0; i < fields.Length; i++)
             {
                 RequestField field = fields[i];
-                field.Serialize(builder);
+                field.Format(builder);
 
                 if (i != fields.Length - 1)
                 {
