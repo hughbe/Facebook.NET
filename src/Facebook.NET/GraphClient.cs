@@ -53,7 +53,7 @@ namespace Facebook
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ConstructRequest<T>(request.PageId, request);
+            return ExecuteRequest<T>(ConstructRequest(request));
         }
 
         public PagedResponse<T> GetPosts<T>(PostsRequest request) where T : Post
@@ -63,7 +63,7 @@ namespace Facebook
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ConstructRequest<T>(request.PageId, request.Edge.ToString(), request);
+            return GraphPagedResponse<T>.ExecuteRequest(ConstructRequest(request));
         }
 
         public T GetComment<T>(CommentRequest request) where T : Comment
@@ -73,7 +73,7 @@ namespace Facebook
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ConstructRequest<T>(request.CommentId, request);
+            return ExecuteRequest<T>(ConstructRequest(request));
         }
 
         public PagedResponse<T> GetComments<T>(CommentsRequest request) where T: Comment
@@ -83,7 +83,7 @@ namespace Facebook
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ConstructRequest<T>(request.ParentId, "comments", request);
+            return GraphPagedResponse<T>.ExecuteRequest(ConstructRequest(request));
         }
 
         public T GetPage<T>(PageRequest request) where T : Page
@@ -93,25 +93,16 @@ namespace Facebook
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ConstructRequest<T>(request.PageId, request);
+            return ExecuteRequest<T>(ConstructRequest(request));
         }
 
-        private GraphPagedResponse<T> ConstructRequest<T>(string node, string api, PagedRequest request)
+        private string ConstructRequest(Request request)
         {
             var builder = new StringBuilder();
-            builder.AppendFormat("{0}/{1}/{2}?access_token={3}&", GraphApiBase, node, api, AccessToken);
+            builder.Append(GraphApiBase);
             request.Format(builder);
-
-            return GraphPagedResponse<T>.ExecuteRequest(builder.ToString());
-        }
-
-        private T ConstructRequest<T>(string node, Request request)
-        {
-            var builder = new StringBuilder();
-            builder.AppendFormat("{0}/{1}?access_token={2}&", GraphApiBase, node, AccessToken);
-            request.Format(builder);
-
-            return ExecuteRequest<T>(builder.ToString());
+            builder.Append($"access_token={AccessToken}");
+            return builder.ToString();
         }
 
         private static T ExecuteRequest<T>(string requestUrl)

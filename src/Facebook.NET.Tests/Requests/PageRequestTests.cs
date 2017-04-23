@@ -11,7 +11,7 @@ namespace Facebook.Requests.Tests
             var pageRequest = new PageRequest("PageId");
             Assert.Equal("PageId", pageRequest.PageId);
             Assert.Null(pageRequest.Fields);
-            Assert.Equal("fields=id,name,fan_count,category&", pageRequest.ToString());
+            Assert.Equal("/PageId?fields=id,name,fan_count,category&", pageRequest.ToString());
         }
 
         [Fact]

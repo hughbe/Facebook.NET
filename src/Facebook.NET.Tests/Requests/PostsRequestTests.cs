@@ -5,16 +5,19 @@ namespace Facebook.Requests.Tests
 {
     public class PostsRequestTests
     {
-        [Fact]
-        public void Ctor_ValidPageIdAndEdge_ReturnsExpected()
+        [Theory]
+        [InlineData(PostsRequestEdge.Feed, "Feed")]
+        [InlineData(PostsRequestEdge.Posts, "Posts")]
+        [InlineData(PostsRequestEdge.Tagged, "Tagged")]
+        public void Ctor_ValidPageIdAndEdge_ReturnsExpected(PostsRequestEdge edge, string expectedEdge)
         {
-            var postsRequest = new PostsRequest("PageId", PostsRequestEdge.Posts);
+            var postsRequest = new PostsRequest("PageId", edge);
             Assert.Equal("PageId", postsRequest.PageId);
-            Assert.Equal(PostsRequestEdge.Posts, postsRequest.Edge);
+            Assert.Equal(edge, postsRequest.Edge);
             Assert.Null(postsRequest.Fields);
-            Assert.Equal("fields=id,message,link,caption,description,from,created_time," +
-                         "updated_time,permalink_url,status_type,type,name,place,shares," +
-                         "comments.limit(0).summary(True),reactions.limit(0).summary(True)&", postsRequest.ToString());
+            Assert.Equal($"/PageId/{expectedEdge}?fields=id,message,link,caption,description,from,created_time,updated_time," +
+                         "permalink_url,status_type,type,name,place,shares,comments.limit(0).summary(True),"                  +
+                         "reactions.limit(0).summary(True)&", postsRequest.ToString());
         }
 
         [Fact]

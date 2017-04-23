@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Facebook.Models;
 using Xunit;
-using System.Collections.Generic;
 
 namespace Facebook.Tests
 {

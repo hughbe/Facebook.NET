@@ -11,7 +11,7 @@ namespace Facebook.Requests.Tests
             var postRequest = new PostRequest("PostId");
             Assert.Equal("PostId", postRequest.PostId);
             Assert.Null(postRequest.Fields);
-            Assert.Equal("fields=id,message,link,caption,description,from,created_time,"  + 
+            Assert.Equal("/PostId?fields=id,message,link,caption,description,from,created_time,"  + 
                          "updated_time,permalink_url,status_type,type,name,place,shares," +
                          "comments.limit(0).summary(True),reactions.limit(0).summary(True)&", postRequest.ToString());
         }

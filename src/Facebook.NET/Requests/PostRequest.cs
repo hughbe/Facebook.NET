@@ -23,6 +23,7 @@ namespace Facebook.Requests
 
         internal override void Format(StringBuilder builder)
         {
+            builder.Append($"/{PostId}?");
             RequestFields.Serialize(Fields ?? RequestFields.DefaultPostFields, builder);
         }
     }

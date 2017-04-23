@@ -23,6 +23,7 @@ namespace Facebook.Requests
 
         internal override void Format(StringBuilder builder)
         {
+            builder.Append($"/{ParentId}/comments?");
             RequestFields.Serialize(Fields ?? RequestFields.DefaultCommentFields, builder);
             base.Format(builder);
         }
