@@ -46,7 +46,7 @@ namespace Facebook
             AccessToken = $"{appId}|{appSecret}";
         }
 
-        public T GetPost<T>(PageRequest request) where T : Post
+        public T GetPost<T>(PostRequest request) where T : Post
         {
             if (request == null)
             {
