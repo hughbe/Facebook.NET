@@ -6,32 +6,50 @@ namespace Facebook
 {
     public class PagedResponse
     {
+        public PagedResponse() : this(0, 0) { }
+
         public PagedResponse(int pageNumber, int pageSize)
         {
-            if (pageNumber < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(pageNumber), pageNumber, "Argument cannot be negative.");
-            }
-            if (pageSize < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(pageSize), pageSize, "Argument cannot be negative.");
-            }
-
             PageNumber = pageNumber;
             PageSize = pageSize;
         }
 
-        public int PageNumber { get; }
-        public int PageSize { get; }
+        private int _pageNumber;
+        public int PageNumber
+        {
+            get => _pageNumber;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), value, "Argument cannot be negative.");
+                }
 
-        public int StartItemIndex => (PageNumber - 1) * PageSize;
+                _pageNumber = value;
+            }
+        }
+
+        private int _pageSize;
+        public int PageSize
+        {
+            get => _pageSize;
+            set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), value, "Argument cannot be negative.");
+                }
+
+                _pageSize = value;
+            }
+        }
+
+        public int StartItemIndex => PageNumber > 0 ? (PageNumber - 1) * PageSize : 0;
         public int EndItemIndex => PageNumber * PageSize;
     }
 
     public abstract class PagedResponse<T> : PagedResponse
     {
-        public PagedResponse(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
-
         public IEnumerable<T> Data { get; set; }
 
         public abstract PagedResponse<T> PreviousPage();

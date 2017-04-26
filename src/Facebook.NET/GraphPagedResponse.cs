@@ -6,8 +6,6 @@ namespace Facebook.Models
 {
     internal class GraphPagedResponse<T> : PagedResponse<T>
     {
-        public GraphPagedResponse(int pageNumber, int pageSize) : base(pageNumber, pageSize) { }
-
         private string RequestUrl { get; set; }
 
         [JsonProperty]
