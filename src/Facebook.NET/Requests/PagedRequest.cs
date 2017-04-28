@@ -11,16 +11,17 @@ namespace Facebook.Requests
             get => _since;
             set
             {
-                if (value >= DateTime.UtcNow)
+                DateTime utcDate = value.ToUniversalTime();
+                if (utcDate >= DateTime.UtcNow)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value), value, "Since cannot be greater than or equal to now.");
                 }
-                if (Until != null && value >= Until)
+                if (Until != null && utcDate >= Until)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value), value, "Since cannot be greater than or equal to until.");
                 }
 
-                _since = value;
+                _since = utcDate;
             }
         }
 
@@ -30,16 +31,17 @@ namespace Facebook.Requests
             get => _until;
             set
             {
-                if (value >= DateTime.UtcNow)
+                DateTime utcDate = value.ToUniversalTime();
+                if (utcDate >= DateTime.UtcNow)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value), value, "Until cannot be greater than or equal to now.");
                 }
-                if (Since != null && value <= Since)
+                if (Since != null && utcDate <= Since)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value), value, "Until cannot be less than or equal to since.");
                 }
 
-                _until = value;
+                _until = utcDate;
             }
         }
 

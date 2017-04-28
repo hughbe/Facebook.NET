@@ -10,7 +10,8 @@ namespace Facebook.Requests.Tests
         {
             var since = new DateTime(2017, 04, 20);
             var pagedRequest = new PagedRequest() { Since = since };
-            Assert.Equal(since, pagedRequest.Since);
+            Assert.Equal(since.ToUniversalTime(), pagedRequest.Since);
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Since.Kind);
             Assert.Equal("since=1492646400&", pagedRequest.ToString());
         }
 
@@ -20,7 +21,8 @@ namespace Facebook.Requests.Tests
             var since = new DateTime(2017, 04, 20);
             var until = new DateTime(2017, 04, 21);
             var pagedRequest = new PagedRequest() { Until = until, Since = since };
-            Assert.Equal(since, pagedRequest.Since);
+            Assert.Equal(since.ToUniversalTime(), pagedRequest.Since);
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Since.Kind);
             Assert.Equal("since=1492646400&until=1492732800&", pagedRequest.ToString());
         }
 
@@ -37,6 +39,7 @@ namespace Facebook.Requests.Tests
         public void Since_SetGreaterThanNow_ThrowsArgumentOutOfRangeException()
         {
             var pagedRequest = new PagedRequest();
+            Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Since = DateTime.Now.AddDays(1));
             Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Since = DateTime.UtcNow.AddDays(1));
         }
 
@@ -45,7 +48,8 @@ namespace Facebook.Requests.Tests
         {
             var until = new DateTime(2017, 04, 21);
             var pagedRequest = new PagedRequest() { Until = until };
-            Assert.Equal(until, pagedRequest.Until);
+            Assert.Equal(until.ToUniversalTime(), pagedRequest.Until);
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Until.Kind);
             Assert.Equal("until=1492732800&", pagedRequest.ToString());
         }
 
@@ -55,7 +59,8 @@ namespace Facebook.Requests.Tests
             var since = new DateTime(2017, 04, 20);
             var until = new DateTime(2017, 04, 21);
             var pagedRequest = new PagedRequest() { Since = since, Until = until };
-            Assert.Equal(until, pagedRequest.Until);
+            Assert.Equal(until.ToUniversalTime(), pagedRequest.Until);
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Until.Kind);
             Assert.Equal("since=1492646400&until=1492732800&", pagedRequest.ToString());
         }
 
@@ -72,6 +77,7 @@ namespace Facebook.Requests.Tests
         public void Until_SetGreaterThanNow_ThrowsArgumentOutOfRangeException()
         {
             var pagedRequest = new PagedRequest();
+            Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Until = DateTime.Now.AddDays(1));
             Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Until = DateTime.UtcNow.AddDays(1));
         }
 
@@ -98,8 +104,8 @@ namespace Facebook.Requests.Tests
         [Fact]
         public void ToString_PaginationLimitSinceUntil_ReturnsExpected()
         {
-            var since = new DateTime(2017, 04, 20);
-            var until = new DateTime(2017, 04, 21);
+            var since = new DateTime(2017, 04, 20).ToUniversalTime();
+            var until = new DateTime(2017, 04, 21).ToUniversalTime();
             var pagedRequest = new PagedRequest()
             {
 
