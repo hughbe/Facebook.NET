@@ -11,7 +11,7 @@ namespace Facebook.Requests
             get => _since;
             set
             {
-                if (value >= DateTime.Now)
+                if (value >= DateTime.UtcNow)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value), value, "Since cannot be greater than or equal to now.");
                 }
@@ -30,7 +30,7 @@ namespace Facebook.Requests
             get => _until;
             set
             {
-                if (value >= DateTime.Now)
+                if (value >= DateTime.UtcNow)
                 {
                     throw new ArgumentOutOfRangeException(nameof(value), value, "Until cannot be greater than or equal to now.");
                 }

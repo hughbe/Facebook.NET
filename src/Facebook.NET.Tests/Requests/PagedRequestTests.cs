@@ -37,7 +37,7 @@ namespace Facebook.Requests.Tests
         public void Since_SetGreaterThanNow_ThrowsArgumentOutOfRangeException()
         {
             var pagedRequest = new PagedRequest();
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Since = DateTime.Now.AddDays(1));
+            Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Since = DateTime.UtcNow.AddDays(1));
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace Facebook.Requests.Tests
         public void Until_SetGreaterThanNow_ThrowsArgumentOutOfRangeException()
         {
             var pagedRequest = new PagedRequest();
-            Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Until = DateTime.Now.AddDays(1));
+            Assert.Throws<ArgumentOutOfRangeException>("value", () => pagedRequest.Until = DateTime.UtcNow.AddDays(1));
         }
 
         [Theory]
