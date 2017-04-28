@@ -35,9 +35,18 @@ namespace Facebook.Models
 
         internal static GraphPagedResponse<T> ExecuteRequest(string requestUrl)
         {
-            var httpHandler = new WinHttpHandler { SslProtocols = SslProtocols.Tls12 };
+            HttpClient client = null;
+            try
+            {
+                var httpHandler = new WinHttpHandler { SslProtocols = SslProtocols.Tls12 };
+                client = new HttpClient(httpHandler);
+            }
+            catch (PlatformNotSupportedException)
+            {
+                client = new HttpClient();
+            }
 
-            using (HttpClient client = new HttpClient(httpHandler))
+            using (client)
             {
                 string responseString;
                 try
