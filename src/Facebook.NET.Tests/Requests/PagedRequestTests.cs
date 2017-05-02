@@ -11,8 +11,8 @@ namespace Facebook.Requests.Tests
             var since = new DateTime(2017, 04, 20);
             var pagedRequest = new PagedRequest() { Since = since };
             Assert.Equal(since.ToUniversalTime(), pagedRequest.Since);
-            Assert.Equal(DateTimeKind.Utc, pagedRequest.Since.Kind);
-            Assert.Equal("since=1492646400&", pagedRequest.ToString());
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Since.Value.Kind);
+            Assert.Equal("since=1492621200&", pagedRequest.ToString());
         }
 
         [Fact]
@@ -22,8 +22,17 @@ namespace Facebook.Requests.Tests
             var until = new DateTime(2017, 04, 21);
             var pagedRequest = new PagedRequest() { Until = until, Since = since };
             Assert.Equal(since.ToUniversalTime(), pagedRequest.Since);
-            Assert.Equal(DateTimeKind.Utc, pagedRequest.Since.Kind);
-            Assert.Equal("since=1492646400&until=1492732800&", pagedRequest.ToString());
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Since.Value.Kind);
+            Assert.Equal("since=1492621200&until=1492707600&", pagedRequest.ToString());
+        }
+
+        [Fact]
+        public void Since_SetNull_ReturnsExpected()
+        {
+            var since = new DateTime(2017, 04, 20);
+            var pagedRequest = new PagedRequest() { Since = since };
+            pagedRequest.Since = null;
+            Assert.Null(pagedRequest.Since);
         }
 
         [Fact]
@@ -49,8 +58,8 @@ namespace Facebook.Requests.Tests
             var until = new DateTime(2017, 04, 21);
             var pagedRequest = new PagedRequest() { Until = until };
             Assert.Equal(until.ToUniversalTime(), pagedRequest.Until);
-            Assert.Equal(DateTimeKind.Utc, pagedRequest.Until.Kind);
-            Assert.Equal("until=1492732800&", pagedRequest.ToString());
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Until.Value.Kind);
+            Assert.Equal("until=1492707600&", pagedRequest.ToString());
         }
 
         [Fact]
@@ -60,8 +69,17 @@ namespace Facebook.Requests.Tests
             var until = new DateTime(2017, 04, 21);
             var pagedRequest = new PagedRequest() { Since = since, Until = until };
             Assert.Equal(until.ToUniversalTime(), pagedRequest.Until);
-            Assert.Equal(DateTimeKind.Utc, pagedRequest.Until.Kind);
-            Assert.Equal("since=1492646400&until=1492732800&", pagedRequest.ToString());
+            Assert.Equal(DateTimeKind.Utc, pagedRequest.Until.Value.Kind);
+            Assert.Equal("since=1492621200&until=1492707600&", pagedRequest.ToString());
+        }
+
+        [Fact]
+        public void Until_SetNull_ReturnsExpected()
+        {
+            var until = new DateTime(2017, 04, 21);
+            var pagedRequest = new PagedRequest() { Until = until };
+            pagedRequest.Until = null;
+            Assert.Null(pagedRequest.Until);
         }
 
         [Fact]
@@ -113,7 +131,7 @@ namespace Facebook.Requests.Tests
                 Since = since,
                 Until = until
             };
-            Assert.Equal("limit=100&since=1492646400&until=1492732800&", pagedRequest.ToString());
+            Assert.Equal("limit=100&since=1492621200&until=1492707600&", pagedRequest.ToString());
         }
     }
 }

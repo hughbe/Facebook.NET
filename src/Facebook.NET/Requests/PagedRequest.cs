@@ -11,17 +11,24 @@ namespace Facebook.Requests
             get => _since;
             set
             {
-                DateTime utcDate = value.ToUniversalTime();
-                if (utcDate >= DateTime.UtcNow)
+                if (value.HasValue)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, "Since cannot be greater than or equal to now.");
-                }
-                if (Until != null && utcDate >= Until)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, "Since cannot be greater than or equal to until.");
-                }
+                    DateTime utcDate = value.Value.ToUniversalTime();
+                    if (utcDate >= DateTime.UtcNow)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(value), value, "Since cannot be greater than or equal to now.");
+                    }
+                    if (Until != null && utcDate >= Until)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(value), value, "Since cannot be greater than or equal to until.");
+                    }
 
-                _since = utcDate;
+                    _since = utcDate;
+                }
+                else
+                {
+                    _since = value;
+                }
             }
         }
 
@@ -31,17 +38,24 @@ namespace Facebook.Requests
             get => _until;
             set
             {
-                DateTime utcDate = value.ToUniversalTime();
-                if (utcDate >= DateTime.UtcNow)
+                if (value.HasValue)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, "Until cannot be greater than or equal to now.");
-                }
-                if (Since != null && utcDate <= Since)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, "Until cannot be less than or equal to since.");
-                }
+                    DateTime utcDate = value.Value.ToUniversalTime();
+                    if (utcDate >= DateTime.UtcNow)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(value), value, "Until cannot be greater than or equal to now.");
+                    }
+                    if (Since != null && utcDate <= Since)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(value), value, "Until cannot be less than or equal to since.");
+                    }
 
-                _until = utcDate;
+                    _until = utcDate;
+                }
+                else
+                {
+                    _until = value;
+                }
             }
         }
 
