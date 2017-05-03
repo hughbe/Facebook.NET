@@ -23,4 +23,8 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  
 </Project>
