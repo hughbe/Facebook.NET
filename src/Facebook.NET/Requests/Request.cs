@@ -5,6 +5,9 @@ namespace Facebook.Requests
 {
     public abstract class Request
     {
+        /// <summary>
+        /// Gets or sets the list of fields that are fetched from the Facebook Graph API.
+        /// </summary>
         public IEnumerable<RequestField> Fields { get; set; }
 
         internal abstract void Format(StringBuilder builder);

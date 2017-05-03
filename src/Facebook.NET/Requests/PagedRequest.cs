@@ -6,6 +6,16 @@ namespace Facebook.Requests
     public class PagedRequest : Request
     {
         private DateTime? _since;
+        private DateTime? _until;
+
+        /// <summary>
+        /// Gets or sets the lower bound of the created_time of data to fetch.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="value"/> is greater than <see cref="DateTime.UtcNow"/>.
+        /// -or-
+        /// <paramref name="value"/> is greater than <see cref="Until"/>.
+        /// </exception>
         public DateTime? Since
         {
             get => _since;
@@ -32,7 +42,14 @@ namespace Facebook.Requests
             }
         }
 
-        private DateTime? _until;
+        /// <summary>
+        /// Gets or sets the upper bound of the created_time of data to fetch.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="value"/> is greater than <see cref="DateTime.UtcNow"/>.
+        /// -or-
+        /// <paramref name="value"/> is greater than <see cref="Until"/>.
+        /// </exception>
         public DateTime? Until
         {
             get => _until;
@@ -60,6 +77,11 @@ namespace Facebook.Requests
         }
 
         private int? _paginationLimit;
+
+        /// <summary>
+        /// Gets or sets the maximum number of results to return in each page.
+        /// </summary>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> is less than or equal to zero.</exception>
         public int? PaginationLimit
         {
             get => _paginationLimit;

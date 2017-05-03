@@ -12,6 +12,10 @@ namespace Facebook.Models
         [JsonProperty]
         private Paging Paging { get; set; }
 
+        /// <summary>
+        /// Gets the previous page of data of length PageSize.
+        /// </summary>
+        /// <returns>The previous page of data if there is a previous page, else null. This represents a slice of data of length PageSize.</returns>
         public override PagedResponse<T> PreviousPage()
         {
             // Nothing before.
@@ -23,6 +27,10 @@ namespace Facebook.Models
             return ExecuteRequest(Paging?.Previous);
         }
 
+        /// <summary>
+        /// Gets the next page of data of length PageSize.
+        /// </summary>
+        /// <returns>The next page of data if there is a next page, else null. This represents a slice of data of length PageSize.</returns>
         public override PagedResponse<T> NextPage()
         {
             // Nothing after.

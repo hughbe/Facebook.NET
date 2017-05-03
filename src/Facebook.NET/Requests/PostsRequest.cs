@@ -5,9 +5,27 @@ namespace Facebook.Requests
 {
     public class PostsRequest : PagedRequest
     {
+        /// <summary>
+        /// Gets the Id of the page to fetch posts from the Facebook Graph API.
+        /// </summary>
         public string PageId { get; }
+
+        /// <summary>
+        /// Gets the type of posts to fetch from the Facebook Graph API.
+        /// </summary>
         public PostsRequestEdge Edge { get; }
 
+        /// <summary>
+        /// Constructs a request for the endpoint https://graph.facebook.com/vX.Y/{PageId}/{Edge}.
+        /// </summary>
+        /// <param name="pageId">The Id of the page to fetch posts from the Facebook Graph API.</param>
+        /// <param name="edge">The type of posts to fetch from the Facebook Graph API.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="pageId"/> is null.</exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="pageId"/> is empty or whitespace.
+        /// -or-
+        /// <paramref name="edge"/> is not a valid <see cref="PostsRequestEdge"/> value
+        /// </exception>
         public PostsRequest(string pageId, PostsRequestEdge edge)
         {
             if (pageId == null)
