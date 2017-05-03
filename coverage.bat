@@ -1,5 +1,5 @@
 set packages=%userprofile%\.nuget\packages
-set opencover=%packages%\opencover\4.6.166\tools\OpenCover.Console.exe
+set opencover=%packages%\opencover\4.6.519\tools\OpenCover.Console.exe
 set xunit=%packages%\xunit.runner.console\2.2.0\tools\xunit.console.exe
 set tests_project=%cd%\src\Facebook.NET.Tests\Facebook.NET.Tests.csproj
 set tests=%cd%\src\Facebook.NET.Tests\bin\Debug\netcoreapp1.1\Facebook.NET.Tests.dll
