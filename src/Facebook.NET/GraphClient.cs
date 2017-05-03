@@ -46,6 +46,8 @@ namespace Facebook
             AccessToken = $"{appId}|{appSecret}";
         }
 
+        public Post GetPost(PostRequest request) => GetPost<Post>(request);
+
         public T GetPost<T>(PostRequest request) where T : Post
         {
             if (request == null)
@@ -55,6 +57,8 @@ namespace Facebook
 
             return ExecuteRequest<T>(ConstructRequest(request));
         }
+
+        public PagedResponse<Post> GetPosts(PostsRequest request) => GetPosts<Post>(request);
 
         public PagedResponse<T> GetPosts<T>(PostsRequest request) where T : Post
         {
@@ -66,6 +70,8 @@ namespace Facebook
             return GraphPagedResponse<T>.ExecuteRequest(ConstructRequest(request));
         }
 
+        public Comment GetComment(CommentRequest request) => GetComment<Comment>(request);
+
         public T GetComment<T>(CommentRequest request) where T : Comment
         {
             if (request == null)
@@ -75,6 +81,8 @@ namespace Facebook
 
             return ExecuteRequest<T>(ConstructRequest(request));
         }
+
+        public PagedResponse<Comment> GetComments(CommentsRequest request) => GetComments<Comment>(request);
 
         public PagedResponse<T> GetComments<T>(CommentsRequest request) where T: Comment
         {
