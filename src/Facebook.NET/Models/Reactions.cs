@@ -2,7 +2,12 @@
 {
     public class Reactions
     {
-        public ReactionsSummary Summary { get; set; }
+        private ReactionsSummary _summary;
+        public ReactionsSummary Summary
+        {
+            get => _summary ?? (_summary = new ReactionsSummary());
+            set => _summary = value;
+        }
 
         public override string ToString() => Summary.ToString();
     }

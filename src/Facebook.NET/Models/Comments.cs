@@ -2,7 +2,12 @@
 {
     public class Comments
     {
-        public CommentsSummary Summary { get; set; }
+        private CommentsSummary _summary;
+        public CommentsSummary Summary
+        {
+            get => _summary ?? (_summary = new CommentsSummary());
+            set => _summary = value;
+        }
 
         public override string ToString() => Summary.ToString();
     }
