@@ -6,9 +6,9 @@ namespace Facebook.Requests.Tests
     public class PostsRequestTests
     {
         [Theory]
-        [InlineData(PostsRequestEdge.Feed, "Feed")]
-        [InlineData(PostsRequestEdge.Posts, "Posts")]
-        [InlineData(PostsRequestEdge.Tagged, "Tagged")]
+        [InlineData(PostsRequestEdge.Feed, "feed")]
+        [InlineData(PostsRequestEdge.Posts, "posts")]
+        [InlineData(PostsRequestEdge.Tagged, "tagged")]
         public void Ctor_ValidPageIdAndEdge_ReturnsExpected(PostsRequestEdge edge, string expectedEdge)
         {
             var postsRequest = new PostsRequest("PageId", edge);
