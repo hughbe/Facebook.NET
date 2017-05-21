@@ -47,7 +47,7 @@ namespace Facebook.Requests
 
         internal override void Format(StringBuilder builder)
         {
-            builder.Append($"/{PageId}/{Edge}?");
+            builder.Append($"/{PageId}/{Edge.ToString().ToLower()}?");
             RequestFields.Serialize(Fields ?? RequestFields.DefaultPostFields, builder);
             base.Format(builder);
         }

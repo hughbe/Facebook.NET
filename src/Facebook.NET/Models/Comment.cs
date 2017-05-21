@@ -21,9 +21,9 @@ namespace Facebook.Models
         public Comment ParentComment { get; set; }
 
         [JsonProperty(PropertyName = "created_time")]
-        public DateTime CreatedTime { get; set; }
+        public DateTime Created { get; set; }
 
         [JsonProperty(PropertyName = "updated_time")]
-        public DateTime UpdatedTime { get; set; }
+        public DateTime LastUpdated { get; set; }
     }
 }

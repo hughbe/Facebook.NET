@@ -62,7 +62,7 @@ namespace Facebook.Models
                 {
                     responseString = client.GetStringAsync(requestUrl).Result;
                 }
-                catch
+                catch (Exception ex)
                 {
                     return null;
                 }

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net46;netstandard1.4</TargetFrameworks>
     <PackageId>Facebook.NET</PackageId>
-    <PackageVersion>1.0.4</PackageVersion>
+    <PackageVersion>1.0.6</PackageVersion>
     <Authors>Hugh Bellamy</Authors>
     <Title>Facebook.NET</Title>
     <Description>A managed .NET wrapper around the Facebook Graph API. Currently a WIP as functionality is limited to The Asia Foundation's use in the Facebook Civic Insights project. Pages, posts and comments are supported.</Description>
@@ -13,7 +13,7 @@
     <PackageLicenseUrl>https://github.com/hughbe/Facebook.NET/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>Copyright 2017 (c) Hugh Bellamy. All rights reserved.</Copyright>
     <PackageTags>facebook facebook.net graph graphapi</PackageTags>
-    <PackageReleaseNotes>Make sure Post.Comments.Summary and Post.Reactions.Summary is never null.</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix posts edge APIs.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
