@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Facebook
 {
@@ -88,13 +89,13 @@ namespace Facebook
         /// Gets the previous page of data of length PageSize.
         /// </summary>
         /// <returns>The previous page of data if there is a previous page, else null. This represents a slice of data of length PageSize.</returns>
-        public abstract PagedResponse<T> PreviousPage();
+        public abstract Task<PagedResponse<T>> PreviousPage();
 
         /// <summary>
         /// Gets the next page of data of length PageSize.
         /// </summary>
         /// <returns>The next page of data if there is a next page, else null. This represents a slice of data of length PageSize.</returns>
-        public abstract PagedResponse<T> NextPage();
+        public abstract Task<PagedResponse<T>> NextPage();
 
         /// <summary>
         /// Gets a combined list of all the data on pages after and including the current page.
@@ -121,11 +122,11 @@ namespace Facebook
         /// <returns>A list of all pages after and not including the current page.</returns>
         public IEnumerable<PagedResponse<T>> AllPagesAfterThis()
         {
-            PagedResponse<T> response = NextPage();
+            PagedResponse<T> response = NextPage().Result;
             while (response != null)
             {
                 yield return response;
-                response = response.NextPage();
+                response = response.NextPage().Result;
             }
         }
     }

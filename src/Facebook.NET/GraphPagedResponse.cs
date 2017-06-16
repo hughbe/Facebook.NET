@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Security.Authentication;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace Facebook.Models
@@ -16,7 +17,7 @@ namespace Facebook.Models
         /// Gets the previous page of data of length PageSize.
         /// </summary>
         /// <returns>The previous page of data if there is a previous page, else null. This represents a slice of data of length PageSize.</returns>
-        public override PagedResponse<T> PreviousPage()
+        public override async Task<PagedResponse<T>> PreviousPage()
         {
             // Nothing before.
             if (Paging?.Previous == null)
@@ -24,14 +25,14 @@ namespace Facebook.Models
                 return null;
             }
 
-            return ExecuteRequest(Paging?.Previous);
+            return await ExecuteRequest(Paging?.Previous);
         }
 
         /// <summary>
         /// Gets the next page of data of length PageSize.
         /// </summary>
         /// <returns>The next page of data if there is a next page, else null. This represents a slice of data of length PageSize.</returns>
-        public override PagedResponse<T> NextPage()
+        public override async Task<PagedResponse<T>> NextPage()
         {
             // Nothing after.
             if (RequestUrl == null)
@@ -39,10 +40,10 @@ namespace Facebook.Models
                 return null;
             }
 
-            return ExecuteRequest(RequestUrl);
+            return await ExecuteRequest(RequestUrl);
         }
 
-        internal static GraphPagedResponse<T> ExecuteRequest(string requestUrl)
+        internal static async Task<GraphPagedResponse<T>> ExecuteRequest(string requestUrl)
         {
             HttpClient client = null;
             try
@@ -60,7 +61,7 @@ namespace Facebook.Models
                 string responseString;
                 try
                 {
-                    responseString = client.GetStringAsync(requestUrl).Result;
+                    responseString = await client.GetStringAsync(requestUrl);
                 }
                 catch (Exception ex)
                 {

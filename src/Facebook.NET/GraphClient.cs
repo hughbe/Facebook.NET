@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Security.Authentication;
 using System.Text;
+using System.Threading.Tasks;
 using Facebook.Models;
 using Facebook.Requests;
 using Newtonsoft.Json;
@@ -72,7 +73,7 @@ namespace Facebook
         /// <param name="request">The details of the request (PostId) to send to the graph API.</param>
         /// <returns>The post with the given Id of request.PostId if the post exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public Post GetPost(PostRequest request) => GetPost<Post>(request);
+        public async Task<Post> GetPost(PostRequest request) => await GetPost<Post>(request);
 
         /// <summary>
         /// Calls https://graph.facebook.com/vX.Y/{request.PostId}.
@@ -81,14 +82,14 @@ namespace Facebook
         /// <param name="request">The details of the request (PostId) to send to the graph API.</param>
         /// <returns>The post with the given Id of request.PostId if the post exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public T GetPost<T>(PostRequest request) where T : Post
+        public async Task<T> GetPost<T>(PostRequest request) where T : Post
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ExecuteRequest<T>(ConstructRequest(request));
+            return await ExecuteRequest<T>(ConstructRequest(request));
         }
 
         /// <summary>
@@ -97,7 +98,7 @@ namespace Facebook
         /// <param name="request">The details of the request (PageId, Since, Until, Limit) to send to the graph API.</param>
         /// <returns>The list of posts under request.PageId in the given range request.Since and request.Until if the page exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public PagedResponse<Post> GetPosts(PostsRequest request) => GetPosts<Post>(request);
+        public async Task<PagedResponse<Post>> GetPosts(PostsRequest request) => await GetPosts<Post>(request);
 
         /// <summary>
         /// Calls https://graph.facebook.com/vX.Y/{request.PageId/{request.Edge}.
@@ -106,14 +107,14 @@ namespace Facebook
         /// <param name="request">The details of the request (PageId, Since, Until, Limit) to send to the graph API.</param>
         /// <returns>The list of posts under request.PageId in the given range request.Since and request.Until if the page exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public PagedResponse<T> GetPosts<T>(PostsRequest request) where T : Post
+        public async Task<PagedResponse<T>> GetPosts<T>(PostsRequest request) where T : Post
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return GraphPagedResponse<T>.ExecuteRequest(ConstructRequest(request));
+            return await GraphPagedResponse<T>.ExecuteRequest(ConstructRequest(request));
         }
 
         /// <summary>
@@ -122,23 +123,23 @@ namespace Facebook
         /// <param name="request">The details of the request (CommentId) to send to the graph API.</param>
         /// <returns>The comment with the given Id of request.CommentId if the comment exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public Comment GetComment(CommentRequest request) => GetComment<Comment>(request);
+        public async Task<Comment> GetComment(CommentRequest request) => await GetComment<Comment>(request);
 
         /// <summary>
         /// Calls https://graph.facebook.com/vX.Y/{request.CommentId}.
-        /// </summary>
+        /// </summary>\
         /// <typeparam name="T">A constructable subclass of Comment to use. This allows deserializing data into custom subclasses that add extra metadata.</typeparam>
         /// <param name="request">The details of the request (CommentId) to send to the graph API.</param>
         /// <returns>The comment with the given Id of request.CommentId if the comment exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public T GetComment<T>(CommentRequest request) where T : Comment
+        public async Task<T> GetComment<T>(CommentRequest request) where T : Comment
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ExecuteRequest<T>(ConstructRequest(request));
+            return await ExecuteRequest<T>(ConstructRequest(request));
         }
         /// <summary>
         /// Calls https://graph.facebook.com/vX.Y/{request.ParentId/comments.
@@ -146,7 +147,7 @@ namespace Facebook
         /// <param name="request">The details of the request (ParentId, Since, Until, Limit) to send to the graph API.</param>
         /// <returns>The list of comments under request.ParentId, the id of a post or a comment, in the given range request.Since and request.Until if the parnet exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public PagedResponse<Comment> GetComments(CommentsRequest request) => GetComments<Comment>(request);
+        public async Task<PagedResponse<Comment>> GetComments(CommentsRequest request) => await GetComments<Comment>(request);
 
         /// <summary>
         /// Calls https://graph.facebook.com/vX.Y/{request.ParentId/comments.
@@ -155,14 +156,14 @@ namespace Facebook
         /// <param name="request">The details of the request (ParentId, Since, Until, Limit) to send to the graph API.</param>
         /// <returns>The list of comments under request.ParentId, the id of a post or a comment, in the given range request.Since and request.Until if the parnet exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public PagedResponse<T> GetComments<T>(CommentsRequest request) where T: Comment
+        public async Task<PagedResponse<T>> GetComments<T>(CommentsRequest request) where T: Comment
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return GraphPagedResponse<T>.ExecuteRequest(ConstructRequest(request));
+            return await GraphPagedResponse<T>.ExecuteRequest(ConstructRequest(request));
         }
 
         /// <summary>
@@ -172,14 +173,14 @@ namespace Facebook
         /// <param name="request">The details of the request (PageId) to send to the graph API.</param>
         /// <returns>The page with the given Id of request.PageId if the page exists, else null.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
-        public T GetPage<T>(PageRequest request) where T : Page
+        public async Task<T> GetPage<T>(PageRequest request) where T : Page
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
             }
 
-            return ExecuteRequest<T>(ConstructRequest(request));
+            return await ExecuteRequest<T>(ConstructRequest(request));
         }
 
         private string ConstructRequest(Request request)
@@ -191,7 +192,7 @@ namespace Facebook
             return builder.ToString();
         }
 
-        private static T ExecuteRequest<T>(string requestUrl)
+        private async static Task<T> ExecuteRequest<T>(string requestUrl)
         {
             HttpClient client = null;
             try
@@ -208,7 +209,7 @@ namespace Facebook
             {
                 try
                 {
-                    string responseString = client.GetStringAsync(requestUrl).Result;
+                    string responseString = await client.GetStringAsync(requestUrl);
                     return JsonConvert.DeserializeObject<T>(responseString);
                 }
                 catch (AggregateException)

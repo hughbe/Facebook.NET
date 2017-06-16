@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Facebook.Models;
 using Xunit;
 
@@ -72,38 +73,38 @@ namespace Facebook.Tests
         }
 
         [Fact]
-        public void GetPost_NullRequest_ThrowsArgumentNullException()
+        public async Task GetPost_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
-            Assert.Throws<ArgumentNullException>("request", () => client.GetPost<Post>(null));
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPost<Post>(null));
         }
 
         [Fact]
-        public void GetPosts_NullRequest_ThrowsArgumentNullException()
+        public async Task GetPosts_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
-            Assert.Throws<ArgumentNullException>("request", () => client.GetPosts<Post>(null));
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPosts<Post>(null));
         }
 
         [Fact]
-        public void GetComment_NullRequest_ThrowsArgumentNullException()
+        public async Task GetComment_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
-            Assert.Throws<ArgumentNullException>("request", () => client.GetComment<Comment>(null));
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetComment<Comment>(null));
         }
 
         [Fact]
-        public void GetComments_NullRequest_ThrowsArgumentNullException()
+        public async Task GetComments_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
-            Assert.Throws<ArgumentNullException>("request", () => client.GetComments<Comment>(null));
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetComments<Comment>(null));
         }
 
         [Fact]
-        public void GetPage_NullRequest_ThrowsArgumentNullException()
+        public async Task GetPage_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
-            Assert.Throws<ArgumentNullException>("request", () => client.GetPage<Page>(null));
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPage<Page>(null));
         }
     }
 }
