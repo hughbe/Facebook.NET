@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Pagination.Primitives;
 
 namespace Facebook.Models
 {

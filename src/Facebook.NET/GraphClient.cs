@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Facebook.Models;
 using Facebook.Requests;
+using Pagination.Primitives;
 using Newtonsoft.Json;
 
 namespace Facebook
