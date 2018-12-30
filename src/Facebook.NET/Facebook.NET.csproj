@@ -4,17 +4,17 @@
     <TargetFrameworks>netstandard1.4</TargetFrameworks>
     <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">net46;$(TargetFrameworks)</TargetFrameworks>
     <PackageId>Facebook.NET</PackageId>
-    <PackageVersion>1.0.8</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Authors>Hugh Bellamy</Authors>
     <Title>Facebook.NET</Title>
     <Description>A managed .NET wrapper around the Facebook Graph API. Currently a WIP as functionality is limited to The Asia Foundation's use in the Facebook Civic Insights project. Pages, posts and comments are supported.</Description>
     <PackageProjectUrl>https://github.com/hughbe/facebook.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hughbe/facebook.net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseUrl>https://github.com/hughbe/Facebook.NET/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>Copyright 2017 (c) Hugh Bellamy. All rights reserved.</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright 2018 (c) Hugh Bellamy. All rights reserved.</Copyright>
     <PackageTags>facebook facebook.net graph graphapi</PackageTags>
-    <PackageReleaseNotes>Separate pagination dependency.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add non generic GetPage.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
