@@ -17,35 +17,46 @@ namespace Facebook
         public string AccessToken { get; }
 
         /// <summary>
-        /// Constructs a GraphClient, the main entrypoint into accessing the Graph API.
+        /// Constructs a GraphClient, the main entrypoint into accessing the Graph API
+        /// using the latest version of the Graph API.
         /// </summary>
-        /// <param name="version">The Facebook Graph API version, e.g. 2.9.</param>
         /// <param name="appId">The Facebook API ID registered at https://developers.facebook.com/apps.</param>
         /// <param name="appSecret">The Facebook API Secret registered at https://developers.facebook.com/apps.</param>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="version"/> is null
-        /// -or-
         /// <paramref name="appId"/> is null
         /// -or-
         /// <paramref name="appSecret"/> is null.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="version"/> has a revision or build
-        /// -or- 
         /// <paramref name="appId"/> is empty or whitespace
         /// -or-
         /// <paramref name="appSecret"/> is empty or whitespace.
         /// </exception>
-        public GraphClient(Version version, string appId, string appSecret)
+        public GraphClient(string appId, string appSecret) : this(appId, appSecret, null)
         {
-            if (version == null)
-            {
-                throw new ArgumentNullException(nameof(version));
-            }
-            if (version.Revision > 0 || version.Build > 0)
-            {
-                throw new ArgumentException("Version must only have a major and minor component.", nameof(version));
-            }
+        }
+
+        /// <summary>
+        /// Constructs a GraphClient, the main entrypoint into accessing the Graph API
+        /// using the specified version of the Graph API.
+        /// </summary>
+        /// <param name="appId">The Facebook API ID registered at https://developers.facebook.com/apps.</param>
+        /// <param name="appSecret">The Facebook API Secret registered at https://developers.facebook.com/apps.</param>
+        /// <param name="version">The Facebook Graph API version, e.g. 2.9.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="appId"/> is null
+        /// -or-
+        /// <paramref name="appSecret"/> is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="appId"/> is empty or whitespace
+        /// -or-
+        /// <paramref name="appSecret"/> is empty or whitespace.
+        /// -or- 
+        /// <paramref name="version"/> has a revision or build
+        /// </exception>
+        public GraphClient(string appId, string appSecret, Version version)
+        {
             if (appId == null)
             {
                 throw new ArgumentNullException(nameof(appId));
@@ -62,10 +73,21 @@ namespace Facebook
             {
                 throw new ArgumentException("Argument cannot be empty or white space.", nameof(appSecret));
             }
+            if (version != null && (version.Revision > 0 || version.Build > 0))
+            {
+                throw new ArgumentException("Version must only have a major and minor component.", nameof(version));
+            }
 
-            Version = version;
-            GraphApiBase = $"https://graph.facebook.com/v{Version.ToString(2)}";
             AccessToken = $"{appId}|{appSecret}";
+            Version = version;
+            if (Version == null)
+            {
+                GraphApiBase = "https://graph.facebook.com";
+            }
+            else
+            {
+                GraphApiBase = $"https://graph.facebook.com/v{Version.ToString(2)}";
+            }
         }
 
         /// <summary>
