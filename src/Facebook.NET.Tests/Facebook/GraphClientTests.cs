@@ -76,6 +76,7 @@ namespace Facebook.Tests
         public async Task GetPost_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPost(null));
             await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPost<Post>(null));
         }
 
@@ -83,6 +84,7 @@ namespace Facebook.Tests
         public async Task GetPosts_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPosts(null));
             await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPosts<Post>(null));
         }
 
@@ -90,6 +92,7 @@ namespace Facebook.Tests
         public async Task GetComment_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetComment(null));
             await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetComment<Comment>(null));
         }
 
@@ -97,6 +100,7 @@ namespace Facebook.Tests
         public async Task GetComments_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetComments(null));
             await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetComments<Comment>(null));
         }
 
@@ -104,6 +108,7 @@ namespace Facebook.Tests
         public async Task GetPage_NullRequest_ThrowsArgumentNullException()
         {
             var client = new GraphClient(new Version(2, 8), "AppId", "AppSecret");
+            await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPage(null));
             await Assert.ThrowsAsync<ArgumentNullException>("request", () => client.GetPage<Page>(null));
         }
     }

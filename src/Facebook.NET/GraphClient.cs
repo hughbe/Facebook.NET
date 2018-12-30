@@ -170,6 +170,14 @@ namespace Facebook
         /// <summary>
         /// Calls https://graph.facebook.com/vX.Y/{request.PageId}.
         /// </summary>
+        /// <param name="request">The details of the request (PageId) to send to the graph API.</param>
+        /// <returns>The page with the given Id of request.PageId if the page exists, else null.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="request"/> is null</exception>
+        public async Task<Page> GetPage(PageRequest request) => await GetPage<Page>(request);
+
+        /// <summary>
+        /// Calls https://graph.facebook.com/vX.Y/{request.PageId}.
+        /// </summary>
         /// <typeparam name="T">A constructable subclass of Page to use. This allows deserializing data into custom subclasses that add extra metadata.</typeparam>
         /// <param name="request">The details of the request (PageId) to send to the graph API.</param>
         /// <returns>The page with the given Id of request.PageId if the page exists, else null.</returns>
