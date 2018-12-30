@@ -65,6 +65,16 @@ namespace Facebook.Requests.Tests
             Assert.Throws<ArgumentOutOfRangeException>("limit", () => listRequestField.Limit(limit));
         }
 
+        [Fact]
+        public void Summary_InvokeParameterless_ReturnsExpected()
+        {
+            var listRequestField = new ListRequestField("FieldName").Summary();
+            Assert.Equal("FieldName", listRequestField.FieldName);
+            Assert.Null(listRequestField.RequestLimit);
+            Assert.True(listRequestField.ShowSummary);
+            Assert.Equal("FieldName.summary(True)", listRequestField.ToString());
+        }
+
         [Theory]
         [InlineData(true, "FieldName.summary(True)")]
         [InlineData(false, "FieldName.summary(False)")]

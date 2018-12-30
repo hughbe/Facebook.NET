@@ -74,7 +74,7 @@ namespace Facebook.Requests
         /// <param name="summary">Whether the request should provide a summary of the data.</param>
         /// <returns>A unique request that has a specified summary.</returns>
         /// <exception cref="InvalidOperationException">The request already has a summary specified.</exception>
-        public ListRequestField Summary(bool summary)
+        public ListRequestField Summary(bool summary = true)
         {
             if (ShowSummary != null)
             {
